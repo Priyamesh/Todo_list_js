@@ -51,6 +51,11 @@ function update() {
 
         tablebody.innerHTML = res;
     }
+    else
+    {
+        tablebody.innerHTML = "";
+    }
+
 
 
 
@@ -60,17 +65,29 @@ function update() {
 function dlt(index) {
     console.log("dlt btn prtessed");
 
-    itemJsonArraystr = localStorage.getItem('itemjson');
-    itemJsonArray = JSON.parse(itemJsonArraystr);
+    let itemJsonArraystr = localStorage.getItem('itemjson');
+    let itemJsonArray = JSON.parse(itemJsonArraystr);
     itemJsonArray.splice(index, 1);
     localStorage.setItem('itemjson', JSON.stringify(itemJsonArray));
     update();
+}
+
+function clearall(){
+    if(confirm("Do you really want to clear all the items"))
+    {   
+        console.log("clear all");
+        localStorage.clear();
+        update();
+    }
+    
 }
 
 
 let addbt = document.querySelector("#addbtn");
 addbt.addEventListener('click', getandupdate);
 
+let clrbtn = document.querySelector("#clrbtn");
+clrbtn.addEventListener('click', clearall);
 
 
 
