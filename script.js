@@ -89,6 +89,9 @@ addbt.addEventListener('click', getandupdate);
 let clrbtn = document.querySelector("#clrbtn");
 clrbtn.addEventListener('click', clearall);
 
+let itmbtn = document.querySelector("#itemsbtn");
+itmbtn.addEventListener('click', update);
+
 
 
 
