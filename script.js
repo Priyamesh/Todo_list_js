@@ -1,7 +1,4 @@
-
-let addbt = document.querySelector("#addbtn");
-
-function update(){
+function getandupdate() {
 
     console.log("updatringgg");
     let todo_tittle = document.getElementById('title').value;
@@ -20,37 +17,60 @@ function update(){
         itemJsonArray.push([todo_tittle, todo_desc]);
         localStorage.setItem('itemjson', JSON.stringify(itemJsonArray));
     }
+    update();
 
-    let tablebody = document.getElementById("tablebody");
-    let res = "";
-    itemJsonArray.forEach((element, index) => {
-        res += `
+
+}
+
+function update() {
+    // if (localStorage.getItem('itemjson') == null) {
+    //     localStorage.setItem('itemjson', JSON.stringify(itemJsonArray));
+    // }
+    // else {
+    //     itemJsonArraystr = localStorage.getItem('itemjson');
+    //     itemJsonArray = JSON.parse(itemJsonArraystr);
+    // }
+
+    if (localStorage.getItem('itemjson') != null) {
+        let itemJsonArray = [];
+        itemJsonArraystr = localStorage.getItem('itemjson');
+        itemJsonArray = JSON.parse(itemJsonArraystr);
+
+        let tablebody = document.getElementById("tablebody");
+        let res = "";
+        itemJsonArray.forEach((element, index) => {
+            res += `
         <tr>
-            <th scope="row">${index+1}</th>
+            <th scope="row">${index + 1}</th>
             <td>${element[0]}</td>
             <td>${element[1]}</td>
             <td><button type="button"  class="btn  btn-outline-danger" onclick="dlt(${index})">Delete</button></td>
         </tr>
         `
-        
-    });
-    
-    tablebody.innerHTML = res;
+        });
+
+        tablebody.innerHTML = res;
+    }
+
+
+
+
 }
 
-addbt.addEventListener('click', update);
-
-function dlt(index){
+function dlt(index) {
     console.log("dlt btn prtessed");
 
     itemJsonArraystr = localStorage.getItem('itemjson');
     itemJsonArray = JSON.parse(itemJsonArraystr);
-    itemJsonArray.splice(index,1);
+    itemJsonArray.splice(index, 1);
     localStorage.setItem('itemjson', JSON.stringify(itemJsonArray));
     update();
-
-
 }
+
+
+let addbt = document.querySelector("#addbtn");
+addbt.addEventListener('click', getandupdate);
+
 
 
 
